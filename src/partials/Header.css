@@ -1,0 +1,48 @@
+.header {
+    background-color: #1F1F2A; 
+    margin-bottom: 2rem;   
+}
+
+.header .div_header {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+    margin: 0 auto;
+}
+
+.header .div_header .div_logo img {
+    width: 90px;
+}
+
+.header .div_header .div_search {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 30px;
+    box-shadow: 1px 1px 4px #000;
+
+    @media screen and (max-width: 500px) {
+        width: 50%;
+    }
+
+    > div {
+        width: 20%;
+        background-color: #2A2B3E;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        color: white;
+    }
+
+    > input {
+        width: 80%;
+        padding: 4px 10px;
+        height: 30px;
+        border: none;
+        outline: none;
+    }
+}

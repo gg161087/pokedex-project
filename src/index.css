@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #D30B41;
+    font-family: "Roboto", sans-serif, "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+}
+#root {
+    font-size: 1.6rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.container {
+    min-width: 1200px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+@media screen and (max-width: 1280px) {
+    .container{
+        min-width: 1000px;
+        max-width: 1000px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .container{
+        min-width: 768px;
+        max-width: 768px;
+    }
+}
+@media screen and (max-width: 880px) {
+    .container{
+        min-width: 580px;
+        max-width: 580px;
+    }
+}
+
+.bg-green {
+    background: #49d0b0;
+}
+.bg-red {
+    background: #fa6d6b;
+}
+.bg-blue {
+    background: #76befe;
+}
+.bg-yellow {
+    background: #ffd76f;
+}
+.bg-brown {
+    background: #544726c8;
+}
+.bg-purple {
+    background: #9a6fff;
+}
+.bg-black {
+    background: #111;
+}
+.bg-pink {
+    background: #fc6cb4;
+}
+.bg-gray {
+    background: #d3d3d3;
+}
+.bg-white {
+    background: #fff;
+}
+.bg-all {
+    background: #999;
+}
+
+
+.color-fire {
+    background-color: #ff7402;
+}
+.color-grass {
+    background-color: #9bcc50;
+}
+.color-steel {
+    background-color: #9eb7b8;
+}
+.color-water {
+    background-color: #4592c4;
+}
+.color-psychic {
+    background-color: #f366b9;
+}
+.color-ground {
+    background-color: #ab9842;
+}
+.color-ice {
+    background-color: #51c4e7;
+}
+.color-flying {
+    background-color: #3dc7ef;
+}
+.color-ghost {
+    background-color: #4d5b64;
+}
+.color-normal {
+    background-color: #a4acaf;
+}
+.color-poison {
+    background-color: #7e0058;
+}
+.color-rock {
+    background-color: #a38c21;
+}
+.color-fighting {
+    background-color: #d56723;
+}
+.color-dark {
+    background-color: #707070;
+}
+.color-bug {
+    background-color: #729f3f;
+}
+.color-dragon {
+    background-image: linear-gradiend(180deg, #53a4cf 50%, #f16e57 50%);
+}
+.color-electric {
+    background-color: #bba909;
+}
+.color-fairy {
+    background-color: #fdb9e9;
+}
+.color-shadow {
+    background-color: #7b62a3;
+}
+.color-unknow {
+    background-color: #757575;
+}
