@@ -48,6 +48,24 @@ body {
         min-width: 580px;
         max-width: 580px;
     }
+    .header .div_header .div_search {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .container{
+        min-width: 360px;
+        max-width: 360px;
+    }
+    .header .div_header .div_search {
+        width: 60%;
+    }
+    .card {
+        height: 32rem;
+    }
+    .card__body-img{
+        height: 23rem;
+    }
 }
 
 .bg-green {

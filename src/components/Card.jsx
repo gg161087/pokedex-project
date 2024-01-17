@@ -71,7 +71,7 @@ export const Card = ({ pokemon }) => {
                     </div>
                     <div className='card__body-types'>
                         {pokemon.types?.map((type, index) => (                                                        
-                            <div className='type' key={index} style={getTypeStyle(type['type'].name)}>                                                                                
+                            <div key={index} className={`type color-${type['type'].name}`}>                                                                                
                                 <span>{type['type'].name}</span>
                             </div>
                         ))}

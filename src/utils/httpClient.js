@@ -4,7 +4,7 @@ import { URL_POKEMONS, URL_EVOLUTIONS, URL_SPECIES, URL_TYPES } from './../confi
 
 const getDynamic = async (URL) => {
     try {
-        const { data } = await axios.get(URL);
+        const { data } = await axios.get(URL);        
         return data.results;
     } catch (error) {
         console.error(error);
@@ -20,7 +20,7 @@ const getAllPokemonDetails = async (pokemonURLs) => {
         pokemonURLs.map(async (pokemon) => {
             const arrayEvoluciones = [];
             try {
-                const { data } = await axios.get(pokemon.url);                
+                const { data } = await axios.get(pokemon.url);                                
                 const specieUrl = data.species.url.split("/"); 
                 const resSpecies = await axios.get(`${URL_SPECIES}/${specieUrl[6]}`);                           
                 const URL = resSpecies.data.evolution_chain.url.split("/");                              
@@ -54,8 +54,7 @@ const getAllPokemonDetails = async (pokemonURLs) => {
                         });
                     }
                 }
-                data.evolutions = arrayEvoluciones; 
-                
+                data.evolutions = arrayEvoluciones;             
                 return data;
             } catch (error) {
                 console.error(`Error obteniendo detalles de ${pokemon.name}:`, error);
@@ -65,9 +64,13 @@ const getAllPokemonDetails = async (pokemonURLs) => {
     );
     return detailedPokemon.filter((pokemon) => pokemon !== null);
 };
+export const getPokemons = async () => {
+    const pokemons = await getDynamic(`${URL_POKEMONS}/?limit=1302`);
+    return pokemons
+}
 
-export const getPokemonsWithDetails = async () => {
-    const pokemons = await getDynamic(URL_POKEMONS);
-    const pokemonDetails = await getAllPokemonDetails(pokemons);  
+export const getPokemonsWithDetails = async (pokemons) => {    
+    const pokemonDetails = await getAllPokemonDetails(pokemons);
+    console.log(pokemonDetails);  
     return pokemonDetails;
 };
