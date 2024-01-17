@@ -70,7 +70,6 @@ export const getPokemons = async () => {
 }
 
 export const getPokemonsWithDetails = async (pokemons) => {    
-    const pokemonDetails = await getAllPokemonDetails(pokemons);
-    console.log(pokemonDetails);  
+    const pokemonDetails = await getAllPokemonDetails(pokemons);     
     return pokemonDetails;
 };

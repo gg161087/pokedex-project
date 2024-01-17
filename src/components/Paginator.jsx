@@ -5,8 +5,8 @@ import { DataContext } from './../contexts/DataContexts.jsx';
 
 import './Paginator.css';
 
-export const Paginator = ({ itemsPerPage, totalItems, currentPage, onPageChange }) => {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+export const Paginator = ({ totalItems, currentPage, onPageChange }) => {
+    const totalPages = Math.ceil(totalItems / 20);
 
     const handlePrevPage = () => {
         if (currentPage > 1) {

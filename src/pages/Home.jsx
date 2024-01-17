@@ -8,20 +8,27 @@ import { Footer } from './../partials/Footer.jsx';
 import { DataContext } from './../contexts/DataContexts.jsx';
 
 export const Home = () => {
-    const [search, setSearch] = useState(''); 
-    const [currentPage, setCurrentPage] = useState(1);    
-    const { pokemons, filterPokemons, setFilterPokemons } = useContext(DataContext);
-    const currentPokemons = pokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon);
-    const itemsPerPage = 20;
 
+    const { allPokemons, getDataDetails } = useContext(DataContext);
+
+    const [search, setSearch] = useState(''); 
+    const [currentPage, setCurrentPage] = useState(1); 
+    const [filterPokemons, setFilterPokemons] = useState([])   
+
+    const itemsPerPage = 20;
+    
     const indexOfLastPokemon = currentPage * itemsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage; 
-
-    const setFilterSearch  = () => {
+    const currentPokemons = allPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon);
+    
+    const setFilterSearch  = async () => {        
         if (search.length > 0) {
-            setFilterPokemons(pokemons?.filter(pokemon => pokemon?.name?.includes(search)));   
-        } else {
-            setFilterPokemons(pokemons);
+            const pokeSearch = allPokemons?.filter(pokemon => pokemon?.name?.includes(search));
+            const pokeSearchWithDetails = await getDataDetails(pokeSearch)
+            setFilterPokemons(pokeSearchWithDetails);   
+        } else {            
+            const pokeSearchWithDetails = await getDataDetails(currentPokemons)         
+            setFilterPokemons(pokeSearchWithDetails);           
         }     
     }
 
@@ -35,11 +42,12 @@ export const Home = () => {
         setCurrentPage(pageNumber);
     };
     
-    useEffect(() => {
+    useEffect(() => {        
         setFilterSearch();
-    }, [filterPokemons])
+    }, [search, currentPage, filterPokemons])
 
-    if (!filterPokemons) {
+    console.log(!filterPokemons && filterPokemons.length < 20);
+    if (!filterPokemons && filterPokemons.length < 20) {
         return (
             <div>
                 loading
@@ -51,7 +59,7 @@ export const Home = () => {
         <>
             <Header getSearch={getSearch}/>
             <Paginator                
-                totalItems={filterPokemons?.length || 0}
+                totalItems={allPokemons?.length || 0}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
             ></Paginator>            
