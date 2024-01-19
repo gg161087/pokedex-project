@@ -12,7 +12,7 @@ export const Home = () => {
     const { allPokemons, getDataDetails } = useContext(DataContext);
 
     const [search, setSearch] = useState(''); 
-    const [currentPage, setCurrentPage] = useState(1); 
+    const [currentPage, setCurrentPage] = useState(1);
     const [filterPokemons, setFilterPokemons] = useState([])   
 
     const itemsPerPage = 20;
@@ -21,7 +21,8 @@ export const Home = () => {
     const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage; 
     const currentPokemons = allPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon);
     
-    const setFilterSearch  = async () => {        
+    const setFilterSearch  = async () => {  
+             
         if (search.length > 0) {
             const pokeSearch = allPokemons?.filter(pokemon => pokemon?.name?.includes(search));
             const pokeSearchWithDetails = await getDataDetails(pokeSearch)
@@ -29,7 +30,8 @@ export const Home = () => {
         } else {            
             const pokeSearchWithDetails = await getDataDetails(currentPokemons)         
             setFilterPokemons(pokeSearchWithDetails);           
-        }     
+        }  
+           
     }
 
     const getSearch = (e) => {
@@ -42,12 +44,11 @@ export const Home = () => {
         setCurrentPage(pageNumber);
     };
     
-    useEffect(() => {        
+    useEffect(() => {               
         setFilterSearch();
-    }, [search, currentPage, filterPokemons])
+    }, [search, currentPage])
 
-    console.log(!filterPokemons && filterPokemons.length < 20);
-    if (!filterPokemons && filterPokemons.length < 20) {
+    if (!filterPokemons && !allPokemons && !currentPokemons) {
         return (
             <div>
                 loading
