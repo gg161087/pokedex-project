@@ -46,6 +46,7 @@ export const DataProvider = ({ children }) => {
             { 
                 allPokemons,
                 filterPokemons,
+                itemsPerPage,
                 currentPage,
                 setCurrentPage,
                 search,

@@ -29,3 +29,8 @@
 .arrow{
     cursor: pointer;
 }
+
+.disabled {
+    cursor: not-allowed;
+    color: #252525;
+}
