@@ -1,8 +1,31 @@
 .paginator{
     font-size: 4rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    
 }
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+  
+.pagination li {
+    display: flex;
+    align-items: center;
+}
+
+.total{
+    font-size: medium;
+}
+
 .arrow{
     cursor: pointer;
 }

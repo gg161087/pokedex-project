@@ -6,7 +6,7 @@ import { DataContext } from './../contexts/DataContexts.jsx';
 import './Paginator.css';
 
 export const Paginator = ({ totalItems, currentPage, onPageChange }) => {
-    const totalPages = Math.ceil(totalItems / 20);
+    const totalPages = Math.ceil(totalItems / 15);
 
     const handlePrevPage = () => {
         if (currentPage > 1) {
@@ -29,7 +29,7 @@ export const Paginator = ({ totalItems, currentPage, onPageChange }) => {
                             <FaArrowLeft onClick={handlePrevPage} disabled={currentPage === 1}/>
                         </li>
                         <li>
-                            <span>Página {currentPage} de {totalPages}</span>
+                            <span className="total">Page {currentPage} of {totalPages}</span>
                         </li>
                         <li>
                             <FaArrowRight onClick={handleNextPage} disabled={currentPage === totalPages}/>                            
