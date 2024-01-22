@@ -18,26 +18,16 @@ export const App = () => {
     const handlerSearch = async (poke) => {
         try {
             const response = await getDynamic(`pokemon/${poke}`)
-            if (response) {
+            if (response.name) {
+                console.log(response);
                 setPokemons([response])
-                setLoading(!loading)
+                setLoading(false)
+            } else {
+                alert('pokemon no encontrado')
+                fetchPokemons();
             }
         } catch (error) {
             console.error(error);
-        }
-    };
-
-    const handlePrevPage = () => {
-        if (page > 1) {
-            const prevPage = Math.max(page -1, 0)  
-            setPage(prevPage)             
-        }
-    };
-
-    const handleNextPage = () => {
-        if (page < total) {
-            const nextPage = Math.min(page +1, total)
-            setPage(nextPage)            
         }
     };
 
@@ -54,26 +44,24 @@ export const App = () => {
     }
 
     useEffect(() => {
+        setLoading(true)
         fetchPokemons()
     }, [page])
 
     return (
         <>
             <Header handlerSearch={handlerSearch} search={search} setSearch={setSearch} />
-            {loading ? <Spinner /> : 
-                <>
                     <Paginator 
-                        handlePrevPage={handlePrevPage}
-                        handleNextPage={handleNextPage}
+                        setPage={setPage}                        
                         page={page}
                         total={total}
                     ></Paginator>
+            {loading ? <Spinner /> : 
+                <>
                     <GridCards pokemons={pokemons} />
                 </>
             }
-            <Footer />
+            <Footer/>
         </>
-
-
     )
 }

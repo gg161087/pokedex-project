@@ -5,7 +5,7 @@ import logo from './../assets/pokedex_logo.svg';
 import './Header.css';
 
 export const Header = ({ handlerSearch, search, setSearch }) => {
-    
+
     const handlerInput = (e) => {
         setSearch(e.target.value)        
     }
