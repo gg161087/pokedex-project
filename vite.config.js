@@ -5,9 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
     plugins: [react()],
     base: "/pokedex-project/",
-    server: {        
-        headers: {
-          'Permissions-Policy': 'interest-cohort=()',
-        },
-    },
+    
 })

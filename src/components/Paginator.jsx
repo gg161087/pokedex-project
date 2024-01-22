@@ -1,27 +1,8 @@
-import { useContext } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
-import { DataContext } from './../contexts/DataContexts.jsx';
 
 import './Paginator.css';
 
-export const Paginator = ({ totalItems, currentPage, onPageChange }) => {
-
-    const { itemsPerPage } = useContext(DataContext);
-
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    const handlePrevPage = () => {
-        if (currentPage > 1) {
-            onPageChange(currentPage - 1);
-        }
-    };
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            onPageChange(currentPage + 1);
-        }
-    };
+export const Paginator = ({ handlePrevPage, handleNextPage, page, total }) => {
 
     return (
         <div className="container">
@@ -29,13 +10,13 @@ export const Paginator = ({ totalItems, currentPage, onPageChange }) => {
                 <nav>
                     <ul className="pagination">
                         <li>
-                            <FaArrowLeft onClick={handlePrevPage} className={ currentPage === 1 ? "disabled" : "arrow"}/>
+                            <FaArrowLeft onClick={handlePrevPage} className={ page === 1 ? "disabled" : "arrow"}/>
                         </li>
                         <li>
-                            <span className="total">Page {currentPage} of {totalPages}</span>
+                            <span className="total">Page {page} of {total}</span>
                         </li>
                         <li>
-                            <FaArrowRight onClick={handleNextPage} className={currentPage === totalPages? "disabled" : "arrow"}/>                            
+                            <FaArrowRight onClick={handleNextPage} className={page === total? "disabled" : "arrow"}/>                            
                         </li>
                     </ul>
                 </nav>               
