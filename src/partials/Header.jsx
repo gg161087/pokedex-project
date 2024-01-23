@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 
 import logo from './../assets/pokedex_logo.svg';
@@ -14,18 +13,18 @@ export const Header = ({ handlerSearch, search, setSearch }) => {
     }
 
     return (
-        <nav className='header'>
-            <div className='div_header container'>
-                <div className='div_logo'>
+        <nav className="header">
+            <div className="div_header container">
+                <div className="div_logo">
                     <img src={logo} alt="logo"/>
                 </div>
-                <div className='div_search'>
-                    <div>
-                        <FaIcons.FaSearch onClick={handlerClick}/>
+                <div className="div_search">
+                    <div className="btn_search" onClick={handlerClick}>
+                        <FaIcons.FaSearch/>
                     </div>
-                    <input type="search" onChange={handlerInput}/>
+                    <input type="search" onChange={handlerInput} placeholder="Nombre de Pokemon"/>
                 </div>
-            </div>
+            </div>            
         </nav>
-    );
-}
+    )
+};

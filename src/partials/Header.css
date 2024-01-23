@@ -14,6 +14,9 @@
 .header .div_header .div_logo img {
     width: 90px;
 }
+.btn_search{
+    cursor: pointer;
+}
 
 .header .div_header .div_search {
     width: 30%;

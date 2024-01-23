@@ -8,13 +8,15 @@ export const Detail = ({ show, pokemon, close }) => {
     const [pokeWithEvo, setPokeWithEvo] = useState(null) 
 
     const fetchPokemonWithEvolutions = async (poke) => {
-        const response = await getPokemonsWithEvolutions(poke)
-        setPokeWithEvo(response)  
-    }
+        if (show) {
+            const response = await getPokemonsWithEvolutions(poke)
+            setPokeWithEvo(response)  
+        }    
+    }  
     
     useEffect(() => {
         fetchPokemonWithEvolutions(pokemon);
-    }, [])
+    }, [show])
 
     if (!pokeWithEvo) {
         return null
@@ -45,7 +47,6 @@ export const Detail = ({ show, pokemon, close }) => {
                                 );
                             })}
                         </div>
-
                         <div className="div_type_color">
                             {pokeWithEvo?.types?.map((ti, index) => {
                                 return (
@@ -70,4 +71,4 @@ export const Detail = ({ show, pokemon, close }) => {
             </section>
         </div>
     )
-}
+};

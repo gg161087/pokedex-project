@@ -17,15 +17,19 @@ export const App = () => {
 
     const handlerSearch = async (poke) => {
         try {
-            const response = await getDynamic(`pokemon/${poke}`)
-            if (response.name) {
-                console.log(response);
-                setPokemons([response])
-                setLoading(false)
-            } else {
-                alert('pokemon no encontrado')
+            if (search.length > 1) {
+                setLoading(true)
+                const response = await getDynamic(`pokemon/${poke}`)                
+                if (response) {                    
+                    setPokemons([response])
+                    setLoading(false)               
+                } else {
+                    alert('pokemon no encontrado')  
+                }
+            } else {                                
                 fetchPokemons();
-            }
+            }                            
+            
         } catch (error) {
             console.error(error);
         }
@@ -39,14 +43,14 @@ export const App = () => {
             setTotal(Math.ceil(response.count / 10))
             setLoading(false)
         } catch (error) {
-
+            console.error(error)
         }
     }
 
     useEffect(() => {
         setLoading(true)
-        fetchPokemons()
-    }, [page])
+        fetchPokemons()        
+    }, [page, search])
 
     return (
         <>

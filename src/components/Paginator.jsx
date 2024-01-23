@@ -4,14 +4,14 @@ import './Paginator.css';
 
 export const Paginator = ({ setPage, page, total }) => {
 
-    const handlePrevPage = () => {
-        if (page > 1) {
+    const handlePrevPage = () => {        
+        if (page > 0) {
             const prevPage = Math.max(page -1, 0)  
             setPage(prevPage)             
         }
     };
 
-    const handleNextPage = () => {
+    const handleNextPage = () => {     
         if (page < total) {
             const nextPage = Math.min(page +1, total)
             setPage(nextPage)            
@@ -24,13 +24,13 @@ export const Paginator = ({ setPage, page, total }) => {
                 <nav>
                     <ul className="pagination">
                         <li>
-                            <FaArrowLeft onClick={handlePrevPage} className={ page === 1 ? "disabled" : "arrow"}/>
+                            <FaArrowLeft onClick={handlePrevPage} className={ page === 0 ? "disabled" : "arrow"}/>
                         </li>
                         <li>
-                            <span className="total">Page {page} of {total}</span>
+                            <span className="total">Page {page+1} of {total}</span>
                         </li>
                         <li>
-                            <FaArrowRight onClick={handleNextPage} className={page === total? "disabled" : "arrow"}/>                            
+                            <FaArrowRight onClick={handleNextPage} className={page+1 === total? "disabled" : "arrow"}/>                            
                         </li>
                     </ul>
                 </nav>               
