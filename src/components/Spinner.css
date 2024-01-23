@@ -1,7 +1,8 @@
-.title__loading{
-    text-align: center;
+.loading{
+    min-height: 50rem;
+    height: 100%;
 }
-.loading {
+.spinner {
     border: 5px solid #e2e2e2;
     border-top-color: #26e;
     border-right-color: #26e;
@@ -11,6 +12,9 @@
     animation: spiner 1s linear infinite;
     grid-column: 1 / 6;
     margin: 0 auto;
+}
+.title__loading{
+    text-align: center;
 }
   
 @keyframes spiner {

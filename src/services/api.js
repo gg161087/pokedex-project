@@ -56,3 +56,11 @@ export const getPokemons = async (limit = 10, offset=0) => {
     const pokemons = await getDynamic(`pokemon/?limit=${limit}&offset=${offset}`);
     return pokemons
 };
+
+export const getPokemonsComplete = async (pokemons) => {
+    const results = await Promise.all(pokemons.map(async(pokemon) => {
+        const pokemonComplete = await getDynamic(`pokemon/${pokemon.name}`)
+        return pokemonComplete   
+    }))
+    return results
+}
