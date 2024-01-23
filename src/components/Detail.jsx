@@ -1,23 +1,41 @@
+import { useState, useEffect } from 'react';
+
+import { getPokemonsWithEvolutions } from './../services/api.js'
+
 import './Detail.css';
 
-export const Detail = ({ show, pokemon, close }) => {       
+export const Detail = ({ show, pokemon, close }) => { 
+    const [pokeWithEvo, setPokeWithEvo] = useState(null) 
+
+    const fetchPokemonWithEvolutions = async (poke) => {
+        const response = await getPokemonsWithEvolutions(poke)
+        setPokeWithEvo(response)  
+    }
     
+    useEffect(() => {
+        fetchPokemonWithEvolutions(pokemon);
+    }, [])
+
+    if (!pokeWithEvo) {
+        return null
+    }
+
     return (
         <div className="modal-container" onClick={close} style={{ display: show ? 'grid' : 'none' }}>
             <section className="modal">
                 <div className="modal-body">
                     <img
                         className="img_poke"
-                        src={pokemon?.sprites?.other["official-artwork"]?.front_default}
+                        src={pokeWithEvo?.sprites?.other["official-artwork"]?.front_default}
                         alt="pokemon"
                     />
                     <div className="characteristics">
-                        <strong className="id">#{pokemon.id}</strong>
-                        <h2 className="name">{pokemon.name}</h2>
-                        <span className="height">Altura: {pokemon.height}0 cm </span>
-                        <span className="weight">Peso: {pokemon.weight} Kg </span>                        
+                        <strong className="id">#{pokeWithEvo.id}</strong>
+                        <h2 className="name">{pokeWithEvo.name}</h2>
+                        <span className="height">Altura: {pokeWithEvo.height}0 cm </span>
+                        <span className="weight">Peso: {pokeWithEvo.weight} Kg </span>                        
                         <div className="stats">
-                            {pokemon?.stats?.map((sta, index) => {
+                            {pokeWithEvo?.stats?.map((sta, index) => {
                                 return (
                                     <h6 key={index} className="stat">
                                         <span className="stat__name">{sta.stat.name}</span>
@@ -29,7 +47,7 @@ export const Detail = ({ show, pokemon, close }) => {
                         </div>
 
                         <div className="div_type_color">
-                            {pokemon?.types?.map((ti, index) => {
+                            {pokeWithEvo?.types?.map((ti, index) => {
                                 return (
                                     <h6 key={index} className={`color-${ti.type.name} color_type`}>                              
                                         {ti.type.name}
@@ -38,7 +56,7 @@ export const Detail = ({ show, pokemon, close }) => {
                             })}
                         </div>
                         <div className="div_evolucion">
-                            {pokemon.evolutions?.map((evo, index) => {
+                            {pokeWithEvo.evolutions?.map((evo, index) => {
                                 return (
                                     <div key={index} className="item_evo">
                                         <img src={evo.img} alt="evo" className="img"/>

@@ -6,7 +6,7 @@ import { Paginator } from './components/Paginator.jsx';
 import { GridCards } from './components/GridCards.jsx';
 import { Footer } from './partials/Footer.jsx';
 
-import { getPokemons, getPokemonsData, getDynamic, getPokemonsComplete } from './services/api.js'
+import { getPokemons, getDynamic, getPokemonsWithDetails } from './services/api.js';
 
 export const App = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -34,7 +34,7 @@ export const App = () => {
     const fetchPokemons = async () => {
         try {
             const response = await getPokemons(10, 10*page);
-            const pokesWithData = await getPokemonsComplete(response.results);
+            const pokesWithData = await getPokemonsWithDetails(response.results);
             setPokemons(pokesWithData)
             setTotal(Math.ceil(response.count / 10))
             setLoading(false)

@@ -4,7 +4,7 @@ const URL_BASE = 'https://pokeapi.co/api/v2/';
 
 export const getDynamic = async (path = '') => {
     try {
-        const { data } = await axios.get(URL_BASE + path);        
+        const { data } = await axios.get(URL_BASE + path);
         return data;
     } catch (error) {
         console.error(error);
@@ -24,43 +24,68 @@ const getEvolutionImg = async (name) => {
     }
 };
 
-export const getPokemonsData = async (pokemons) => {    
-    try {       
-        const results = await Promise.all(pokemons.map(async(pokemon) => {            
-            const arrayEvoluciones = [];           
-            const pokemonData = await getDynamic(`pokemon/${pokemon.name}`)            
-            const pokemonSpecie = await getWithUrl(pokemonData.species.url)            
-            const pokemonEvolution = await getWithUrl(pokemonSpecie.evolution_chain.url) 
+export const getPokemonsData = async (pokemons) => {
+    try {
+        const results = await Promise.all(pokemons.map(async (pokemon) => {
+            const arrayEvoluciones = [];
+            const pokemonData = await getDynamic(`pokemon/${pokemon.name}`)
+            const pokemonSpecie = await getWithUrl(pokemonData.species.url)
+            const pokemonEvolution = await getWithUrl(pokemonSpecie.evolution_chain.url)
             if (pokemonEvolution.chain?.species.name) {
-                const name = await getEvolutionImg(pokemonEvolution.chain?.species.name)                
+                const name = await getEvolutionImg(pokemonEvolution.chain?.species.name)
                 arrayEvoluciones.push(name)
             }
             if (pokemonEvolution.chain?.evolves_to[0]) {
-                const name = await getEvolutionImg(pokemonEvolution.chain?.evolves_to[0]?.species.name); 
-                arrayEvoluciones.push(name)              
-            }                 
+                const name = await getEvolutionImg(pokemonEvolution.chain?.evolves_to[0]?.species.name);
+                arrayEvoluciones.push(name)
+            }
             if (pokemonEvolution.chain?.evolves_to[0]?.evolves_to[0]) {
                 const name = await getEvolutionImg(pokemonEvolution.chain?.evolves_to[0]?.evolves_to[0]?.species.name);
                 arrayEvoluciones.push(name)
             }
             pokemonData.evolutions = arrayEvoluciones;
             return pokemonData
-        }))        
+        }))
         return results
     } catch (error) {
         console.error(error)
     }
 };
 
-export const getPokemons = async (limit = 10, offset=0) => {
+export const getPokemons = async (limit = 10, offset = 0) => {
     const pokemons = await getDynamic(`pokemon/?limit=${limit}&offset=${offset}`);
     return pokemons
 };
 
-export const getPokemonsComplete = async (pokemons) => {
-    const results = await Promise.all(pokemons.map(async(pokemon) => {
+export const getPokemonsWithDetails = async (pokemons) => {
+    const results = await Promise.all(pokemons.map(async (pokemon) => {
         const pokemonComplete = await getDynamic(`pokemon/${pokemon.name}`)
-        return pokemonComplete   
+        return pokemonComplete
     }))
     return results
+}
+
+export const getPokemonsWithEvolutions = async (pokemon) => {
+    try {
+        const arrayEvoluciones = [];
+        const pokemonData = await getDynamic(`pokemon/${pokemon.name}`)
+        const pokemonSpecie = await getWithUrl(pokemonData.species.url)
+        const pokemonEvolution = await getWithUrl(pokemonSpecie.evolution_chain.url)
+        if (pokemonEvolution.chain?.species.name) {
+            const name = await getEvolutionImg(pokemonEvolution.chain?.species.name)
+            arrayEvoluciones.push(name)
+        }
+        if (pokemonEvolution.chain?.evolves_to[0]) {
+            const name = await getEvolutionImg(pokemonEvolution.chain?.evolves_to[0]?.species.name);
+            arrayEvoluciones.push(name)
+        }
+        if (pokemonEvolution.chain?.evolves_to[0]?.evolves_to[0]) {
+            const name = await getEvolutionImg(pokemonEvolution.chain?.evolves_to[0]?.evolves_to[0]?.species.name);
+            arrayEvoluciones.push(name)
+        }
+        pokemonData.evolutions = arrayEvoluciones;
+        return pokemonData
+    } catch (error) {
+        console.error(error)
+    }
 }
